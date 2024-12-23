@@ -1,4 +1,4 @@
-package traitement;
+//package traitement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,10 +9,21 @@ public class Repertoire {
     private List<Repertoire> sousrepertoire;
     private List<File> fichiers;
 
-    public Repertoire(String nom) {
-        this.nom = nom;
+
+    public Repertoire(File chemin) {
+        this.nom = chemin.getName();
         this.sousrepertoire = new ArrayList<>();
         this.fichiers = new ArrayList<>();
+        File[] files = chemin.listFiles();
+        if (files != null) {
+            for (File file : files) {
+                if (file.isDirectory()) {
+                    this.sousrepertoire.add(new Repertoire(file));
+                } else {
+                    this.fichiers.add(file);
+                }
+            }
+        }
     }
 
     public String getNom() {
@@ -49,6 +60,7 @@ public class Repertoire {
 
     public int nbrFichier() {
         int totalFichiers = fichiers.size();
+        System.out.println("Nombre de fichiers dans " + nom + " : " + totalFichiers);
         for (Repertoire r : sousrepertoire) {
             totalFichiers += r.nbrFichier();
         }
