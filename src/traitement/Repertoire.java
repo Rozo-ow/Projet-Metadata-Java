@@ -1,4 +1,4 @@
-//package traitement;
+package traitement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -116,5 +116,13 @@ public class Repertoire {
     // Méthode pour calculer le nombre total d'images dans les formats supportés dans ce répertoire et ses sous-répertoires
     public int nbrImage() {
         return nbrImagesPNG() + nbrImagesJPEG() + nbrImagesWEBP();
+    }
+
+    public String stats() {
+        return "Nombre total de fichiers : " + nbrFichier() + "\n" +
+                "Nombre total d'images PNG : " + nbrImagesPNG() + "\n" +
+                "Nombre total d'images JPEG : " + nbrImagesJPEG() + "\n" +
+                "Nombre total d'images WEBP : " + nbrImagesWEBP() + "\n" +
+                "Nombre total d'images : " + nbrImage();
     }
 }

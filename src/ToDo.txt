@@ -1,0 +1,5 @@
+type mime (contourné)
+classe terminale
+cli
+gui
+

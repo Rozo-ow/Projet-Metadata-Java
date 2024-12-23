@@ -1,5 +1,5 @@
+package traitement ;
 
-//package src.traitement;
 import org.apache.tika.metadata.Metadata;
 import org.apache.tika.parser.AutoDetectParser;
 import org.apache.tika.sax.BodyContentHandler;
@@ -8,8 +8,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
-import java.util.HashMap;
-import java.util.Map;
+//import java.util.HashMap;
+//import java.util.Map;
 
 public class MetadataExtractor {
     private File file;
