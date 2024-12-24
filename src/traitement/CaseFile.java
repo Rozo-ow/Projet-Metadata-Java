@@ -1,4 +1,5 @@
 package traitement;
+
 import java.io.File;
 
 public class CaseFile extends Case {

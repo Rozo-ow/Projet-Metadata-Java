@@ -1,11 +1,12 @@
 package traitement;
 
 
+import java.io.File;
 import java.lang.Exception;
 
 public class CaseDirectory extends Case {
 
-    public void directory(String[] args) throws Exception 
+    public void directory(String[] args) throws Exception{ 
 
         //case directory is not provided
         if (args.length == 1)
@@ -20,11 +21,11 @@ public class CaseDirectory extends Case {
         }
 
         //case directory does not exists
-        Repertoire R = new Repertoire(args[1]);
-        
-        {
-            throw new Exception("File or filepath does not exist");
+        File directory = new File(args[1]);
+        if (!directory.exists() || !directory.isDirectory()) {
+            throw new Exception("Directory Does Not Exist");
         }
+        Repertoire R = new Repertoire(directory);
 
         //case there is an option --stats or not
         if (args.length == 3) {
@@ -34,6 +35,7 @@ public class CaseDirectory extends Case {
             }
 
         }
+        
 
         //si -d, directory fourni et existant, et aucune options :
 
@@ -43,6 +45,10 @@ public class CaseDirectory extends Case {
 
         if(args.length == 3) {
             System.out.println(R.stats());
+        }
+
+        {
+            throw new Exception("File or filepath does not exist");
         }
 
     }

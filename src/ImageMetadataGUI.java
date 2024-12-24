@@ -1,5 +1,9 @@
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
+import traitement.MetadataExtractor;
+import traitement.Repertoire;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -76,9 +80,9 @@ public class ImageMetadataGUI {
 
         openDirItem.addActionListener(e -> openDirectoryAction());
 
-        saveSnapshotItem.addActionListener(e -> saveSnapshotAction());
+        //saveSnapshotItem.addActionListener(e -> saveSnapshotAction());
 
-        restoreSnapshotItem.addActionListener(e -> restoreSnapshotAction());
+        //restoreSnapshotItem.addActionListener(e -> restoreSnapshotAction());
 
         searchByNameItem.addActionListener(e -> searchByNameAction());
 
@@ -111,7 +115,7 @@ public class ImageMetadataGUI {
             displayDirectoryContents(selectedDirectory);
         }
     }
-
+/*
     private void saveSnapshotAction() {
         fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -135,7 +139,7 @@ public class ImageMetadataGUI {
             JOptionPane.showMessageDialog(frame, "Snapshot restauré avec succès.");
         }
     }
-
+*/
     private void searchByNameAction() {
         String name = JOptionPane.showInputDialog(frame, "Entrez le nom ou une partie du nom du fichier :");
         if (name != null) {

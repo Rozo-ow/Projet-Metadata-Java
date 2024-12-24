@@ -1,5 +1,5 @@
-package traitement ;
-import traitement.Fichier;
+//package traitement ;
+//import traitement.Fichier;
 /**
 public class FichierImg extends Fichier{
 
