@@ -137,4 +137,16 @@ public class Repertoire {
                 "Nombre total d'images WEBP : " + nbrImagesWEBP() + "\n" +
                 "Nombre total d'images : " + nbrImage();
     }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        for (File fichier : fichiers) {
+            result.append(fichier.getName()).append(",").append(fichier.lastModified()).append("\n");
+        }
+        for (Repertoire r : sousrepertoire) {
+            result.append(r.toString());
+        }
+        return result.toString();
+    }
 }
