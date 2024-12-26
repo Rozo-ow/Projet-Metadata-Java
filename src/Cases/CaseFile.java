@@ -1,4 +1,4 @@
-package traitement;
+package Cases;
 
 import java.io.File;
 

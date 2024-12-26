@@ -1,4 +1,4 @@
-package traitement;
+//package traitement;
 
 
 import java.io.BufferedReader;
@@ -114,7 +114,7 @@ public class Snapshot {
         return modifications;
     }
 
-    /* 
+    
     // Exemple d'utilisations avec deux snapshots creees precedemment. Ici j'utilise des chemins absolus, mais on peut aussi utiliser des chemins relatifs.
     public static void main(String[] args) {
         File snap1 = new File("C:\\Users\\robin\\Desktop\\rep\\Projet-Metadata-Java\\algoC.txt");
@@ -122,6 +122,7 @@ public class Snapshot {
         int modifications = compareSnapshot(snap1, snap2);
         System.out.println("Nombre de modifications detectees : " + modifications);
     }
-    */
+    
+    
 
 }

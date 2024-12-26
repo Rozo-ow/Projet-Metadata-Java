@@ -1,4 +1,4 @@
-package traitement ;
+//package traitement ;
 
 import java.io.File;
 import java.util.Scanner;
