@@ -11,7 +11,7 @@ public class Repertoire {
 
 
     public Repertoire(File chemin) {
-        this.nom = chemin.getName();
+        this.nom = chemin.getAbsolutePath();
         this.sousrepertoire = new ArrayList<>();
         this.fichiers = new ArrayList<>();
         File[] files = chemin.listFiles();

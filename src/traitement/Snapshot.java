@@ -50,8 +50,8 @@ public class Snapshot {
      * @param fileName Le nom du fichier dans lequel sauvegarder le snapshot.
      * @throws IOException Si une erreur survient lors de l'ecriture du fichier.
      */
-    public void saveSnapshot(String fileName) throws IOException {
-        fileName = fileName + ".txt";
+    public void saveSnapshot() throws IOException {
+        String fileName = rep.getNom() + ".txt";
         BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
         writer.write(rep.toString());
         writer.close();

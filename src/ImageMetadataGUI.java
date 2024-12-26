@@ -1,9 +1,5 @@
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
-//import traitement.MetadataExtractor;
-//import traitement.Repertoire;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,9 +16,13 @@ public class ImageMetadataGUI {
     private JLabel imageLabel;
     private JFileChooser fileChooser;
     private Snapshot snapshot;
+    private JMenuItem saveSnapshotItem;
+    private JMenuItem restoreSnapshotItem;
+    private boolean directoryOpened = false;
+    private File selectedDirectory ;
+    private Repertoire currentRepertoire;
 
     public ImageMetadataGUI() {
-        snapshot = new Snapshot("initial state");
         initialize();
     }
 
@@ -39,8 +39,8 @@ public class ImageMetadataGUI {
         JMenu fileMenu = new JMenu("Fichier");
         JMenuItem openFileItem = new JMenuItem("Ouvrir un fichier");
         JMenuItem openDirItem = new JMenuItem("Ouvrir un répertoire");
-        JMenuItem saveSnapshotItem = new JMenuItem("Sauvegarder l'état");
-        JMenuItem restoreSnapshotItem = new JMenuItem("Restaurer un état");
+        saveSnapshotItem = new JMenuItem("Sauvegarder l'état");
+        restoreSnapshotItem = new JMenuItem("Restaurer un état");
 
         fileMenu.add(openFileItem);
         fileMenu.add(openDirItem);
@@ -80,15 +80,17 @@ public class ImageMetadataGUI {
 
         openDirItem.addActionListener(e -> openDirectoryAction());
 
-        //saveSnapshotItem.addActionListener(e -> saveSnapshotAction());
-
-        //restoreSnapshotItem.addActionListener(e -> restoreSnapshotAction());
+        saveSnapshotItem.addActionListener(e -> saveSnapshotAction());
 
         searchByNameItem.addActionListener(e -> searchByNameAction());
 
         searchByDimensionsItem.addActionListener(e -> searchByDimensionsAction());
 
         searchByDateItem.addActionListener(e -> searchByDateAction());
+
+        // Désactiver les boutons liés aux snapshots par défaut
+        saveSnapshotItem.setEnabled(false);
+        restoreSnapshotItem.setEnabled(false);
 
         frame.setVisible(true);
     }
@@ -111,37 +113,37 @@ public class ImageMetadataGUI {
 
         int result = fileChooser.showOpenDialog(frame);
         if (result == JFileChooser.APPROVE_OPTION) {
-            File selectedDirectory = fileChooser.getSelectedFile();
+            selectedDirectory = fileChooser.getSelectedFile();
+            Repertoire currentRepertoire = new Repertoire(selectedDirectory);
             displayDirectoryContents(selectedDirectory);
+
+            // Activer les boutons liés aux snapshots
+            directoryOpened = true;
+            saveSnapshotItem.setEnabled(true);
+            restoreSnapshotItem.setEnabled(true);
         }
     }
 
-    /* 
     private void saveSnapshotAction() {
+        if (!directoryOpened || currentRepertoire == null) {
+            JOptionPane.showMessageDialog(frame, "Veuillez ouvrir un répertoire avant de sauvegarder un snapshot.", "Erreur", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
         fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 
         int result = fileChooser.showSaveDialog(frame);
         if (result == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
-            snapshot.saveSnapshot(file.getAbsolutePath());
+            snapshot = new Snapshot(selectedDirectory.getAbsolutePath());
+            //quand on save une snapshot on doit dire le nom du fichier dans lequel il sera sauvegardé (voir savesnapshot())
+            //donc ce que je veux c'est que quand tu appelles saveSnapshot ca ouvre une fenetre pour demander le nom du fichier dans lequek il sera sauvegardé
+            //snapshot.saveSnapshot();
             JOptionPane.showMessageDialog(frame, "Snapshot sauvegardé avec succès.");
         }
     }
-     */
-    /**
-    private void restoreSnapshotAction() {
-        fileChooser = new JFileChooser();
-        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 
-        int result = fileChooser.showOpenDialog(frame);
-        if (result == JFileChooser.APPROVE_OPTION) {
-            File file = fileChooser.getSelectedFile();
-            snapshot.restoreSnapshot(file.getAbsolutePath());
-            JOptionPane.showMessageDialog(frame, "Snapshot restauré avec succès.");
-        }
-    }
-    */
     private void searchByNameAction() {
         String name = JOptionPane.showInputDialog(frame, "Entrez le nom ou une partie du nom du fichier :");
         if (name != null) {
@@ -187,12 +189,12 @@ public class ImageMetadataGUI {
     }
 
     private void displayDirectoryContents(File directory) {
-        Repertoire rep = new Repertoire(directory);
+        Repertoire currentRepertoire = new Repertoire(directory);
         textArea.setText("Contenu du répertoire:\n");
-        textArea.append("Nombre total de fichiers image: " + rep.nbrImage() + "\n");
-        textArea.append("Nombre d'images PNG: " + rep.nbrImagesPNG() + "\n");
-        textArea.append("Nombre d'images JPEG: " + rep.nbrImagesJPEG() + "\n");
-        textArea.append("Nombre d'images WEBP: " + rep.nbrImagesWEBP() + "\n");
+        textArea.append("Nombre total de fichiers: " + currentRepertoire.nbrFichier() + "\n");
+        textArea.append("Nombre d'images PNG: " + currentRepertoire.nbrImagesPNG() + "\n");
+        textArea.append("Nombre d'images JPEG: " + currentRepertoire.nbrImagesJPEG() + "\n");
+        textArea.append("Nombre d'images WEBP: " + currentRepertoire.nbrImagesWEBP() + "\n");
     }
 
     public static void main(String[] args) {
