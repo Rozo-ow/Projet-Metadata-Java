@@ -1,7 +1,7 @@
 package Cases;
 
-import traitement.Repertoire;
-// import traitement.Snapshot; 
+import traitment.Repertoire;
+import traitment.Snapshot; 
 import java.io.File;
 import java.lang.Exception;
 
@@ -10,10 +10,6 @@ public class CaseDirectory extends Case {
 
     public void directory(String[] args) throws Exception{ 
 
-        if (args.length == 0) {
-            throw new Exception("No Arguments Exception");
-        }
-
         //case directory is not provided
         if (args.length == 1)
         {
@@ -21,7 +17,7 @@ public class CaseDirectory extends Case {
         }
 
         //case directory is provided and there is more than one option
-        if (args.length > 3)
+        if (args.length > 4)
         {
             throw new Exception("Too Much Arguments Exception");
         }
@@ -47,15 +43,16 @@ public class CaseDirectory extends Case {
                 else  {
                     if (args[2].equals("--snapshotsave")) {
                         Snapshot s = new Snapshot(args[1]);
-                        s.saveSnapshot("snapshot");
+                        s.saveSnapshot(args[1]);
                 } 
                     else {
                         if(args[2].equals("--snapshotcompare")) {
                             Snapshot s = new Snapshot(args[1]);
-                            Snapshot s2 = new Snapshot(args[3]);
+                            Snapshot s2 = new Snapshot(args[4]);
                             File file1 = new File(args[1]);
-                            File file2 = new File(args[3]);
-                            System.out.println(s.compareSnapshot(file1, file2));
+                            // a reparer
+                            File file2 = new File(args[4]);
+                            System.out.println(Snapshot.compareSnapshot(file1, file2));
                         }
                         else {
                             throw new Exception("Options Does Not Exist");

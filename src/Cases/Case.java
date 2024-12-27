@@ -1,7 +1,7 @@
 package Cases;
-
-public abstract class Case {
-
-
+/*
+ * This class is a abstract class used for all the cases that differents arguments brings.
+ */
+public class Case {
+    public Case(){}
 }
-    

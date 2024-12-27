@@ -8,6 +8,9 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.util.List;
+import traitment.Repertoire;
+import traitment.Snapshot;
+import traitment.MetadataExtractor;
 
 public class ImageMetadataGUI {
 

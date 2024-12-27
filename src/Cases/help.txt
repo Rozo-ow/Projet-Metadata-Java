@@ -1,0 +1,16 @@
+Primary arguments (only one at the time) : 
+'-d' / '--directory' : to put a directory.
+'-h' / '--help' : to get this help document.
+'-f' / '--file' : to put a file name then use options listed below
+
+seconds arguments : 
+For a file (max 3 arguments)
+detection
+'--stat' : return the main statistics of the named file
+'--info' : return the metadate of the named file
+
+For a directory (max 4 arguments)
+detection
+'--stat' : return the main statistics of the named directory
+'--snapshotsave filename' : save the current state of the directory named filename
+'--snapshotcompare filename' compare the current state of the directory with a snapshot
