@@ -128,6 +128,7 @@ public class ImageMetadataGUI {
     }
 
     private void saveSnapshotAction() {
+        Repertoire currentRepertoire = new Repertoire(selectedDirectory) ;
         if (!directoryOpened || currentRepertoire == null) {
             JOptionPane.showMessageDialog(frame, "Veuillez ouvrir un répertoire avant de sauvegarder un snapshot.", "Erreur", JOptionPane.WARNING_MESSAGE);
             return;

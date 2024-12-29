@@ -1,4 +1,4 @@
-//package traitement ;
+package traitment ;
 
 import org.apache.tika.metadata.Metadata;
 import org.apache.tika.parser.AutoDetectParser;

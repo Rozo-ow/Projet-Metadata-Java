@@ -1,34 +1,51 @@
 package traitment ;
-
-import java.io.File;
+import Cases.* ;
 import java.util.Scanner;
+import java.io.File;
+import Cases.CaseFile;
 
-public class MainCli{
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
 
-        // Demander à l'utilisateur de saisir une chaîne
-        System.out.print("Veuillez entrer une chaîne de caractères : ");
-        String userInput = scanner.nextLine();
-        scanner.close();
-        if(userInput.contains(".")){
-            try {
-                MetadataExtractor i = new MetadataExtractor(userInput);
-                System.out.println(i.getMetadata());
-            } catch (Exception e) {
-                System.err.println(e.getMessage());
-            }
+public class MainCli {
+    public static final void main(String[] args) {
+        // Vérification si des arguments ont été fournis
+        if (args.length == 0) {
+            System.out.println("Veuillez fournir au moins un argument.");
+            System.out.println("Pour obtenir de l'aide, utilisez : java cases.Main help");
+            return;
         }
-        else {
-            File directory = new File(userInput);
-            if (!directory.exists() || !directory.isDirectory()) {
-                System.err.println("Directory doe not exist.");//throw new Exception("Directory Does Not Exist");
+
+        // Récupération du premier argument (commande)
+        String command = args[0];
+
+        // Traitement des différentes commandes possibles
+        switch (command) {
+            case "--help":
+                CaseHelp ch = new CaseHelp();
+                ch.help() ;
+                System.out.println("Liste des commandes disponibles :");
+                System.out.println("- help : Affiche cette aide.");
+                // ... ajouter d'autres commandes et leurs descriptions
+                break;
+            case "--directory":
+            try {
+                CaseDirectory caseDirectory = new CaseDirectory();
+                caseDirectory.directory(args);
+            } catch (Exception e) {
+                System.out.println("An error occurred while processing the directory: " + e.getMessage());
+                e.printStackTrace();
             }
-            Repertoire r = new Repertoire(directory);
-        } 
+                break;
+            case "file":
+                try {
+                    CaseFile caseFile = new CaseFile();
+                    caseFile.file(args);
+                } catch (Exception e) {
+                    System.out.println("An error occurred while processing the file: " + e.getMessage());
+                }
+                break;
+            default:
+                System.out.println("Commande inconnue : " + command);
+                break;
+        }
     }
-
-
-
-    
 }

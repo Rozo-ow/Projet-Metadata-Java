@@ -1,4 +1,4 @@
-//package traitement;
+package traitment;
 
 import java.util.ArrayList;
 import java.util.List;
