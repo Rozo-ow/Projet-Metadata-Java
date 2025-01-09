@@ -1,7 +1,5 @@
 package traitment ;
 import Cases.* ;
-import java.util.Scanner;
-import java.io.File;
 import Cases.CaseFile;
 
 
@@ -19,6 +17,7 @@ public class MainCli {
 
         // Traitement des différentes commandes possibles
         switch (command) {
+            case "-h":
             case "--help":
                 CaseHelp ch = new CaseHelp();
                 ch.help() ;
@@ -26,6 +25,7 @@ public class MainCli {
                 System.out.println("- help : Affiche cette aide.");
                 // ... ajouter d'autres commandes et leurs descriptions
                 break;
+            case "-d":
             case "--directory":
             try {
                 CaseDirectory caseDirectory = new CaseDirectory();
@@ -35,10 +35,12 @@ public class MainCli {
                 e.printStackTrace();
             }
                 break;
-            case "file":
+            case "-f":
+            case "--file":
                 try {
                     CaseFile caseFile = new CaseFile();
                     caseFile.file(args);
+
                 } catch (Exception e) {
                     System.out.println("An error occurred while processing the file: " + e.getMessage());
                 }
